@@ -1,0 +1,79 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-13T20:29:03.390Z",
+  "summary": "Core navigation/pages, flashcards, quiz generation/player, and a kid-friendly warm theme are implemented. However, the backend progress model/API does not match the per-topic progress requirements, and there is no evidence (in the provided diff summary) that the Progress page renders the required per-topic stats or that backend-stored progress is actually displayed/loaded per user. Several unrequested features (profiles, RBAC/admin token initialization) were added.",
+  "missing_requirements": [
+    {
+      "id": "REQ-4",
+      "requirement": "Persist per-user learning progress per topic (flashcards viewed count per topic, quiz attempts, best score per topic) in the backend and display it on the Progress page with per-topic stats including most recent score.",
+      "reason": "Frontend progress tracking appears to be stored in localStorage per-topic, but the backend Progress type and saveProgress/getProgress APIs are aggregate fields (correctAnswers/incorrectAnswers/totalQuestions/timeOnTask) rather than per-topic stats required by REQ-4. Also, the diff summary does not include any ProgressPage implementation showing the required per-topic stats UI or loading backend data for display.",
+      "evidence": [
+        "backend/main.mo (type Progress has only correctAnswers/incorrectAnswers/totalQuestions/timeOnTask)",
+        "frontend/src/hooks/useProgress.ts (per-topic stats stored in localStorage; backend sync sends aggregated totals)",
+        "frontend/src/hooks/useQueries.ts (getProgress returns a single Progress object, not per-topic stats)",
+        "frontend/src/App.tsx (ProgressPage referenced but file content not shown in diff summary)"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Backend APIs to store and retrieve a signed-in user’s progress as per-principal records, with stable deterministic structures that the frontend can render for per-topic progress.",
+      "reason": "While progress is stored per caller principal, the exposed Progress structure is not aligned with the required per-topic fields (flashcards viewed, quizzes taken, best score, most recent score per topic). The API shape shown cannot directly serve the Progress page’s per-topic rendering requirements.",
+      "evidence": [
+        "backend/main.mo (Progress type lacks per-topic progress fields; saveProgress/getProgress operate on this aggregate type)"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "User profile management (get/save caller user profile) and a forced profile setup modal.",
+      "reason": "The BuildRequest does not request user profiles or name capture; it focuses on learning, quizzes, and progress.",
+      "evidence": [
+        "backend/main.mo (UserProfile type and getCallerUserProfile/getUserProfile/saveCallerUserProfile methods)",
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/hooks/useQueries.ts (useGetCallerUserProfile/useSaveCallerUserProfile)",
+        "frontend/src/App.tsx (renders ProfileSetupModal when authenticated)"
+      ]
+    },
+    {
+      "description": "Role-based access control (authorization mixins/state), admin permissions, and secret admin token initialization via URL parameter.",
+      "reason": "The BuildRequest only requires per-principal isolation using Internet Identity, not RBAC/admin roles or secret-token initialization paths.",
+      "evidence": [
+        "backend/main.mo (MixinAuthorization, AccessControl, hasPermission/isAdmin checks)",
+        "frontend/src/hooks/useActor.ts (reads caffeineAdminToken from URL and calls actor._initializeAccessControlWithSecret)"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AppLayout.tsx",
+    "frontend/src/components/AuthGateNotice.tsx",
+    "frontend/src/components/FlashcardPlayer.tsx",
+    "frontend/src/components/ProfileSetupModal.tsx",
+    "frontend/src/components/QuizPlayer.tsx",
+    "frontend/src/components/QuizSummary.tsx",
+    "frontend/src/components/TopicPicker.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useProgress.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/learningContent.ts",
+    "frontend/src/lib/progressTypes.ts",
+    "frontend/src/lib/quizEngine.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/LearnPage.tsx",
+    "frontend/src/pages/ProgressPage.tsx",
+    "frontend/src/pages/QuizPage.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

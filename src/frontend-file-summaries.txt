@@ -1,0 +1,22 @@
+{
+  "frontend/src/App.tsx": "Main app component managing page navigation state and rendering the appropriate page component within AppLayout, with profile setup modal for authenticated users.",
+  "frontend/src/components/AppLayout.tsx": "Shared layout wrapper providing header with login/logout, bottom navigation bar, and footer with attribution, applying consistent kid-friendly styling across all pages.",
+  "frontend/src/pages/HomePage.tsx": "Home page featuring hero image, mascot welcome message, and three large action cards for navigating to Learn, Quiz, and Progress sections.",
+  "frontend/src/pages/LearnPage.tsx": "Learn page container that shows topic picker or flashcard player based on selection state.",
+  "frontend/src/pages/QuizPage.tsx": "Quiz page container that shows topic picker or quiz player based on selection state.",
+  "frontend/src/pages/ProgressPage.tsx": "Progress page displaying per-topic statistics (flashcards viewed, quizzes taken, best score, latest score) with auth gate notice for guest users.",
+  "frontend/src/components/TopicPicker.tsx": "Topic selection component displaying four large topic cards (Alphabet, Numbers, Colors, Shapes) with icons from generated assets.",
+  "frontend/src/components/FlashcardPlayer.tsx": "Interactive flashcard player with next/previous navigation, shuffle, and reveal functionality, recording progress on each view.",
+  "frontend/src/components/QuizPlayer.tsx": "Quiz flow component managing question progression, answer selection, immediate feedback, and score tracking, showing summary at completion.",
+  "frontend/src/components/QuizSummary.tsx": "End-of-quiz summary displaying final score, correct answers count, encouraging message, and restart button.",
+  "frontend/src/components/AuthGateNotice.tsx": "Alert banner explaining that progress won't be saved without sign-in, with prominent login button.",
+  "frontend/src/components/ProfileSetupModal.tsx": "Modal dialog prompting new users to enter their name on first login, preventing flash by checking profile fetch status.",
+  "frontend/src/lib/learningContent.ts": "Bundled learning content definitions for all four topics (Alphabet A-Z, Numbers 0-20, Colors, Shapes) with prompt/answer pairs.",
+  "frontend/src/lib/quizEngine.ts": "Quiz generation utilities creating multiple-choice questions with distractors from learning content, supporting 10 questions per topic.",
+  "frontend/src/lib/progressTypes.ts": "TypeScript interfaces for per-topic progress tracking (flashcards viewed, quizzes taken, best/recent scores).",
+  "frontend/src/hooks/useProgress.ts": "Custom hook managing local storage progress tracking with backend sync for authenticated users, providing methods to record flashcard views and quiz completions.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for backend operations including user profile management and progress persistence.",
+  "frontend/src/index.css": "Global styles with warm, playful OKLCH color palette (orange/coral/peach tones), custom warm color utilities, and Fredoka display font for kid-friendly design.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending theme with warm color palette, Fredoka display font family, and increased border radius for playful rounded UI.",
+  "frontend/index.html": "HTML entry point with updated title and Google Fonts imports for Fredoka and Inter font families."
+}

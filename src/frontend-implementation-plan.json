@@ -1,0 +1,244 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "MVP Kids Learning App (Flashcards, Quizzes, Progress) — Frontend",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create core app structure with kid-friendly navigation to Home, Learn (Flashcards), Quiz, and Progress.",
+      "acceptanceCriteria": [
+        "App has a clear primary navigation (tabs or sidebar) to Home, Learn, Quiz, and Progress.",
+        "Home page explains the app in simple English and provides large, kid-friendly buttons to start learning.",
+        "All pages are responsive and usable on mobile and desktop."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the main app shell with primary navigation (tab bar or sidebar) and route/state switching for Home, Learn, Quiz, and Progress views; include a prominent sign-in/sign-out entry using the authorization component’s Internet Identity hook patterns. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "create",
+          "description": "Implement a simple-English Home screen with large buttons linking into Learn and Quiz topic selection, and a clear link to Progress; ensure mobile-first spacing and touch targets. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/LearnPage.tsx",
+          "operation": "create",
+          "description": "Create the Learn (Flashcards) page container that hosts topic selection and the flashcard experience (wired to REQ-2 content/components). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/QuizPage.tsx",
+          "operation": "create",
+          "description": "Create the Quiz page container that hosts topic selection and the quiz flow UI (wired to REQ-3 logic/components). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ProgressPage.tsx",
+          "operation": "create",
+          "description": "Create the Progress page container that reads progress state (guest/local + signed-in/backend) and renders per-topic stats (wired to REQ-4). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/main.tsx",
+          "operation": "modify",
+          "description": "Confirm App import path resolves and wrap the app with any required providers already present (React Query + InternetIdentityProvider) so navigation/pages can access auth and data caching as needed. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Bundle MVP learning topics (Alphabet, Numbers, Colors, Shapes) and present them as interactive flashcards with reveal and shuffle.",
+      "acceptanceCriteria": [
+        "User can choose a topic (Alphabet, Numbers, Colors, Shapes).",
+        "Flashcards support Next/Previous, a random/shuffle option, and a big ‘Reveal’ interaction (e.g., show letter/word then reveal example).",
+        "Content is included in the app (no external API dependency)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/lib/learningContent.ts",
+          "operation": "create",
+          "description": "Add in-app bundled content definitions for Alphabet (A–Z), Numbers (0–20), Colors, and Shapes, including enough metadata to support flashcards and quiz generation (e.g., prompts and reveal payload)."
+        },
+        {
+          "path": "frontend/src/components/TopicPicker.tsx",
+          "operation": "create",
+          "description": "Create a kid-friendly topic selection component used by Learn and Quiz, displaying large topic tiles and labels. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/FlashcardPlayer.tsx",
+          "operation": "create",
+          "description": "Implement interactive flashcards for a selected topic with Next/Previous controls, Shuffle, and a prominent Reveal interaction; emit progress events (e.g., ‘viewed’) for REQ-4. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/LearnPage.tsx",
+          "operation": "modify",
+          "description": "Wire LearnPage to use the bundled learning content plus TopicPicker and FlashcardPlayer, keeping the experience fully offline (no external APIs). Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add quiz mode that creates age-appropriate multiple-choice questions from the bundled content and shows results at the end.",
+      "acceptanceCriteria": [
+        "User can start a quiz for a selected topic and answer at least 10 questions (or all items for small topics).",
+        "Each question has 3–4 large answer choices.",
+        "After answering, the UI clearly indicates correct/incorrect and advances to the next question.",
+        "At quiz end, show total score and a restart option."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/lib/quizEngine.ts",
+          "operation": "create",
+          "description": "Create quiz generation utilities that derive 10+ multiple-choice questions per selected topic from the same bundled learning content (including distractor selection and deterministic scoring)."
+        },
+        {
+          "path": "frontend/src/components/QuizPlayer.tsx",
+          "operation": "create",
+          "description": "Build the quiz flow UI: question prompt, 3–4 large answer choices, immediate correct/incorrect feedback, and progression through the question set; emit quiz result events for REQ-4 persistence. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/QuizSummary.tsx",
+          "operation": "create",
+          "description": "Create an end-of-quiz summary component showing total score and a big restart option. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/QuizPage.tsx",
+          "operation": "modify",
+          "description": "Wire QuizPage to use TopicPicker, QuizPlayer, and QuizSummary; ensure at least 10 questions (or all items where fewer) and kid-friendly choice buttons. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Display per-topic progress and sync it for signed-in users; allow guest usage with clear messaging that progress won’t be saved until sign-in.",
+      "acceptanceCriteria": [
+        "Progress page shows per-topic stats: flashcards viewed, quizzes taken, best score, and most recent score.",
+        "Progress is retained after page refresh and across sessions for the same signed-in user.",
+        "If the user is not signed in, the UI still works but clearly indicates that progress will not be saved until sign-in (in simple English)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/lib/progressTypes.ts",
+          "operation": "create",
+          "description": "Define frontend progress models for per-topic stats (flashcards viewed, quizzes taken, best score, most recent score) and mapping helpers for backend progress payloads once available."
+        },
+        {
+          "path": "frontend/src/hooks/useProgress.ts",
+          "operation": "create",
+          "description": "Implement a progress hook that (1) tracks progress updates from flashcards/quizzes, (2) persists guest progress locally for refresh continuity, (3) when signed in, syncs to backend via the actor using the authorization component’s actor/identity patterns. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AuthGateNotice.tsx",
+          "operation": "create",
+          "description": "Create a simple-English inline notice/banner used on Progress (and optionally Learn/Quiz) that explains: ‘You can play without signing in, but your progress won’t be saved until you sign in.’ Include a large sign-in button wired via the authorization component login pattern. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Use the authorization component’s User Profile Setup guidance to prompt for a kid-friendly name the first time a principal logs in (getCallerUserProfile/saveCallerUserProfile) and avoid modal flash by following the recommended query gating pattern. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ProgressPage.tsx",
+          "operation": "modify",
+          "description": "Render per-topic progress cards (Alphabet/Numbers/Colors/Shapes) using the progress hook; show AuthGateNotice when not signed in; when signed in, show the saved user name (from authorization profile) instead of principal. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/FlashcardPlayer.tsx",
+          "operation": "modify",
+          "description": "Emit ‘flashcard viewed’ updates (per topic) into the shared progress hook whenever the user advances/reveals cards. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/QuizPlayer.tsx",
+          "operation": "modify",
+          "description": "Emit quiz attempt completion data (per topic: most recent score; update best score; increment quizzes taken) into the shared progress hook at quiz end. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/backend.d.ts",
+          "operation": "modify",
+          "description": "Update frontend backend type definitions as needed to support per-topic progress structures required by the UI (while keeping existing authorization-related types intact), so the frontend can render backend-returned progress with minimal field mapping."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Apply a cohesive kid-friendly theme (non blue/purple palette), playful typography, rounded UI, and large touch targets across all screens.",
+      "acceptanceCriteria": [
+        "Theme is consistent across Home, Learn, Quiz, and Progress (colors, spacing, button style).",
+        "All interactive elements meet a kid-friendly minimum size (large buttons, easy tapping).",
+        "No default-looking unstyled pages; the UI feels intentionally designed for kids."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add Tailwind base layers and define a warm, playful CSS variable palette (avoiding blue/purple), rounded radii defaults, and accessible font sizing for kid-friendly touch targets."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust theme extensions (colors/radius/typography utilities) to support the kid-friendly design system (warm pastel palette, rounded components, larger spacing) used across pages."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a shared layout wrapper applying consistent page padding, max-width behavior, header/nav styling, and large button styles by composing existing shadcn-ui primitives (do not modify immutable UI component files). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap page rendering with AppLayout and ensure navigation controls use consistent kid-friendly sizing and rounded styles by composing shadcn-ui components (no edits inside frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add required generated images under frontend/public/assets/generated and use them in Home and topic selection UI.",
+      "acceptanceCriteria": [
+        "Generated images exist in frontend/public/assets/generated with the exact filenames specified.",
+        "Home uses the hero illustration, and Learn/Quiz topic selection uses the topic icons.",
+        "Images are loaded directly as static assets (not fetched from the backend)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/home-hero.dim_1600x900.png",
+          "operation": "create",
+          "description": "Add the generated Home hero illustration asset at the exact required path and filename for static loading by the frontend."
+        },
+        {
+          "path": "frontend/public/assets/generated/icon-alphabet.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated Alphabet topic icon asset at the exact required path and filename for static loading by the frontend."
+        },
+        {
+          "path": "frontend/public/assets/generated/icon-numbers.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated Numbers topic icon asset at the exact required path and filename for static loading by the frontend."
+        },
+        {
+          "path": "frontend/public/assets/generated/icon-colors.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated Colors topic icon asset at the exact required path and filename for static loading by the frontend."
+        },
+        {
+          "path": "frontend/public/assets/generated/icon-shapes.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated Shapes topic icon asset at the exact required path and filename for static loading by the frontend."
+        },
+        {
+          "path": "frontend/public/assets/generated/mascot.dim_768x768.png",
+          "operation": "create",
+          "description": "Add the generated friendly mascot asset at the exact required path and filename for static loading by the frontend."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Wire the static hero illustration from frontend/public/assets/generated/home-hero.dim_1600x900.png into the Home UI and optionally include the mascot from frontend/public/assets/generated/mascot.dim_768x768.png as a friendly accent; ensure images are referenced as static assets. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/TopicPicker.tsx",
+          "operation": "modify",
+          "description": "Display topic icons for selection using static assets: frontend/public/assets/generated/icon-alphabet.dim_512x512.png, frontend/public/assets/generated/icon-numbers.dim_512x512.png, frontend/public/assets/generated/icon-colors.dim_512x512.png, frontend/public/assets/generated/icon-shapes.dim_512x512.png. Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 1rem;
+        
+        /* Warm, playful color palette for kids */
+        --background: 0.98 0.02 45;
+        --foreground: 0.25 0.05 30;
+        --card: 1 0 0;
+        --card-foreground: 0.25 0.05 30;
+        --popover: 1 0 0;
+        --popover-foreground: 0.25 0.05 30;
+        
+        /* Warm orange/coral primary */
+        --primary: 0.65 0.18 35;
+        --primary-foreground: 1 0 0;
+        
+        /* Soft peach secondary */
+        --secondary: 0.92 0.08 45;
+        --secondary-foreground: 0.35 0.08 30;
+        
+        /* Light warm muted */
+        --muted: 0.95 0.03 45;
+        --muted-foreground: 0.55 0.05 35;
+        
+        /* Soft yellow accent */
+        --accent: 0.88 0.12 75;
+        --accent-foreground: 0.35 0.08 30;
+        
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        
+        --border: 0.88 0.05 45;
+        --input: 0.88 0.05 45;
+        --ring: 0.65 0.18 35;
+        
+        /* Warm color palette */
+        --warm-50: 0.98 0.02 45;
+        --warm-100: 0.95 0.04 45;
+        --warm-200: 0.90 0.06 45;
+        --warm-300: 0.82 0.08 40;
+        --warm-400: 0.70 0.15 38;
+        --warm-500: 0.62 0.18 35;
+        --warm-600: 0.52 0.16 32;
+        --warm-700: 0.42 0.12 30;
+        --warm-800: 0.32 0.08 28;
+        --warm-900: 0.22 0.05 25;
+    }
+
+    .dark {
+        --background: 0.20 0.03 30;
+        --foreground: 0.95 0.02 45;
+        --card: 0.25 0.04 30;
+        --card-foreground: 0.95 0.02 45;
+        --popover: 0.25 0.04 30;
+        --popover-foreground: 0.95 0.02 45;
+        
+        --primary: 0.70 0.18 38;
+        --primary-foreground: 0.15 0.03 30;
+        
+        --secondary: 0.30 0.05 35;
+        --secondary-foreground: 0.95 0.02 45;
+        
+        --muted: 0.30 0.04 35;
+        --muted-foreground: 0.70 0.05 40;
+        
+        --accent: 0.75 0.15 70;
+        --accent-foreground: 0.20 0.04 30;
+        
+        --destructive: 0.704 0.191 22.216;
+        --destructive-foreground: 0.95 0.02 45;
+        
+        --border: 0.35 0.04 35;
+        --input: 0.35 0.04 35;
+        --ring: 0.70 0.18 38;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    }
+    
+    .font-display {
+        font-family: 'Fredoka', 'Comic Sans MS', cursive, sans-serif;
+    }
+}
+
+@layer utilities {
+    .bg-warm-50 { background-color: oklch(var(--warm-50)); }
+    .bg-warm-100 { background-color: oklch(var(--warm-100)); }
+    .bg-warm-200 { background-color: oklch(var(--warm-200)); }
+    .bg-warm-300 { background-color: oklch(var(--warm-300)); }
+    .bg-warm-400 { background-color: oklch(var(--warm-400)); }
+    .bg-warm-500 { background-color: oklch(var(--warm-500)); }
+    .bg-warm-600 { background-color: oklch(var(--warm-600)); }
+    .bg-warm-700 { background-color: oklch(var(--warm-700)); }
+    .bg-warm-800 { background-color: oklch(var(--warm-800)); }
+    .bg-warm-900 { background-color: oklch(var(--warm-900)); }
+    
+    .text-warm-50 { color: oklch(var(--warm-50)); }
+    .text-warm-100 { color: oklch(var(--warm-100)); }
+    .text-warm-200 { color: oklch(var(--warm-200)); }
+    .text-warm-300 { color: oklch(var(--warm-300)); }
+    .text-warm-400 { color: oklch(var(--warm-400)); }
+    .text-warm-500 { color: oklch(var(--warm-500)); }
+    .text-warm-600 { color: oklch(var(--warm-600)); }
+    .text-warm-700 { color: oklch(var(--warm-700)); }
+    .text-warm-800 { color: oklch(var(--warm-800)); }
+    .text-warm-900 { color: oklch(var(--warm-900)); }
+    
+    .border-warm-50 { border-color: oklch(var(--warm-50)); }
+    .border-warm-100 { border-color: oklch(var(--warm-100)); }
+    .border-warm-200 { border-color: oklch(var(--warm-200)); }
+    .border-warm-300 { border-color: oklch(var(--warm-300)); }
+    .border-warm-400 { border-color: oklch(var(--warm-400)); }
+    .border-warm-500 { border-color: oklch(var(--warm-500)); }
+    .border-warm-600 { border-color: oklch(var(--warm-600)); }
+    .border-warm-700 { border-color: oklch(var(--warm-700)); }
+    .border-warm-800 { border-color: oklch(var(--warm-800)); }
+    .border-warm-900 { border-color: oklch(var(--warm-900)); }
+}

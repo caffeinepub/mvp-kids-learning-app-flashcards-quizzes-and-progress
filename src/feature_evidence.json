@@ -1,0 +1,140 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-the-core-app-structure-and-navigation-for-a-kids-learning-app-with-these-sections-home-learn-flashcards-quiz-and-progress",
+      "featureTitle": "Create the core app structure and navigation for a Kids Learning App with these sections: Home, Learn (Flashcards), Quiz, and Progress.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/main.tsx",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/pages/LearnPage.tsx",
+        "frontend/src/pages/ProgressPage.tsx",
+        "frontend/src/pages/QuizPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-learning-content-for-an-mvp-set-of-topics-alphabet-a-z-numbers-0-20-colors-and-shapes-presented-as-interactive-flashcards",
+      "featureTitle": "Implement learning content for an MVP set of topics: Alphabet (A–Z), Numbers (0–20), Colors, and Shapes, presented as interactive flashcards.",
+      "files": [
+        "frontend/src/components/FlashcardPlayer.tsx",
+        "frontend/src/components/TopicPicker.tsx",
+        "frontend/src/lib/learningContent.ts",
+        "frontend/src/pages/LearnPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-quiz-mode-that-generates-age-appropriate-multiple-choice-questions-from-the-same-mvp-content-alphabet-numbers-colors-shapes-and-shows-a-simple-results-summary-at-the-end",
+      "featureTitle": "Add a quiz mode that generates age-appropriate multiple-choice questions from the same MVP content (Alphabet, Numbers, Colors, Shapes) and shows a simple results summary at the end.",
+      "files": [
+        "frontend/src/components/QuizPlayer.tsx",
+        "frontend/src/components/QuizSummary.tsx",
+        "frontend/src/lib/quizEngine.ts",
+        "frontend/src/pages/QuizPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-persist-per-user-learning-progress-e-g-flashcards-viewed-count-per-topic-quiz-attempts-best-score-per-topic-in-the-backend-and-display-it-on-the-progress-page",
+      "featureTitle": "Persist per-user learning progress (e.g., flashcards viewed count per topic, quiz attempts, best score per topic) in the backend and display it on the Progress page.",
+      "files": [
+        "frontend/src/components/AuthGateNotice.tsx",
+        "frontend/src/components/FlashcardPlayer.tsx",
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/components/QuizPlayer.tsx",
+        "frontend/src/hooks/useProgress.ts",
+        "frontend/src/lib/progressTypes.ts",
+        "frontend/src/pages/ProgressPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-cohesive-kid-friendly-visual-theme-distinct-color-palette-not-based-on-blue-purple-playful-typography-choices-rounded-components-large-touch-targets-consistently-across-all-screens",
+      "featureTitle": "Apply a cohesive, kid-friendly visual theme (distinct color palette not based on blue/purple, playful typography choices, rounded components, large touch targets) consistently across all screens.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-the-required-generated-images-as-static-assets-under-frontend-public-assets-generated-and-use-them-in-the-ui-e-g-home-hero-and-topic-icons",
+      "featureTitle": "Add the required generated images as static assets under frontend/public/assets/generated and use them in the UI (e.g., home hero and topic icons).",
+      "files": [
+        "frontend/src/components/TopicPicker.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
